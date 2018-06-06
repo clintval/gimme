@@ -1,0 +1,5 @@
+Vagrant.configure('2') do |config|
+  config.vm.provider :aws do |aws|
+    aws.ami = 'ami-e251209a'
+  end
+end
