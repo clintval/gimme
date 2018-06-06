@@ -27,5 +27,5 @@ Load the following variables into your environment.
 ```bash
 ❯ cat credentials
 export aws_access_key_id=YOURACCESSIDGOESHERE
-export aws_secret_access_key=YOURSECRETKEYGOESHERE`
+export aws_secret_access_key=YOURSECRETKEYGOESHERE
 ```
