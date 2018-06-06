@@ -1,0 +1,26 @@
+---
+- hosts: all
+  remote_user: ec2-user
+  become: yes
+
+  environment:
+    AWS_ACCESS_KEY_ID: "{{ lookup('env','AWS_ACCESS_KEY_ID') }}"
+    AWS_SECRET_ACCESS_KEY: "{{ lookup('env','AWS_SECRET_ACCESS_KEY') }}"
+
+  tasks:
+    - name: Install all managed packages
+      yum: name={{item}} state=latest
+      with_items:
+        - htop
+        - mlocate
+        - parallel
+        - pigz
+        - wget
+        - zsh
+
+    - name: Sync target sets
+      command: >
+        aws s3 sync
+          --no-progress
+          s3://twinstrand-reference-data/target-sets
+          /pipeline/reference-data/target-sets
