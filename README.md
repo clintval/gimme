@@ -16,7 +16,7 @@
 A dummy box is provided for the `aws` provider. This acts as a pass-through for Vagrant.
 
 ```bash
-❯ address=http://cloud-images.ubuntu.com/vagrant/precise/current/precise-server-cloudimg-i386-vagrant-disk1.box
+❯ address=https://github.com/clintval/gimme/raw/master/example-box/aws-dummy.box
 ❯ vagrant box add aws-dummy "${address}" --provider aws
 ```
 
