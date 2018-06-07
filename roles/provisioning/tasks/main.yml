@@ -1,0 +1,7 @@
+---
+- name: Sync target sets
+  command: >
+    aws s3 sync
+      --no-progress
+      s3://{{ aws_bucket }}/target-sets
+      /pipeline/reference-data/target-sets
