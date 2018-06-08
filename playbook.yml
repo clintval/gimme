@@ -36,15 +36,21 @@
     - name: install packages managed by `conda`
       conda: name={{ item }} state=latest channels=bioconda executable={{ miniconda_conda_bin }}
       with_items:
+        - bcftools
+        - bedtools
         - bwa
         - bwakit
         - fgbio
         - ipython
         - numpy
         - picard
+        - primer3
+        - repeatmasker
         - samtools
         - scipy
         - vardict
+        - vcftools
+        - viennarna
 
     - name: tell GNU parallel you will cite
       become: False
