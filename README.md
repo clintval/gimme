@@ -2,7 +2,6 @@
 
 - Vagrant
 - Ansible
-- `aws-cli`
 
 #### Vagrant Plugins
 
