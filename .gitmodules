@@ -1,0 +1,9 @@
+[submodule "roles/miniconda"]
+	path = roles/miniconda
+	url = git@github.com:andrewrothstein/ansible-miniconda.git
+[submodule "library/conda"]
+	path = library/conda
+	url = git@github.com:UDST/ansible-conda.git
+[submodule ".dotfiles"]
+	path = .dotfiles
+	url = git@github.com:clintval/.dotfiles.git
