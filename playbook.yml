@@ -61,7 +61,6 @@
           group: "{{ ansible_ssh_user }}"
           owner: "{{ ansible_ssh_user }}"
           mode: 0775
-
       - copy:
           content: ''
           dest: '~/.parallel/will-cite'
