@@ -1,26 +1,72 @@
 ---
 - hosts: all
+  become: True
   remote_user: ec2-user
-  become: yes
+
+  vars:
+    miniconda_make_sys_default: True
+    miniconda_pkg_update: False
+
+  roles:
+    - miniconda
 
   environment:
     AWS_ACCESS_KEY_ID: "{{ lookup('env','AWS_ACCESS_KEY_ID') }}"
     AWS_SECRET_ACCESS_KEY: "{{ lookup('env','AWS_SECRET_ACCESS_KEY') }}"
 
   tasks:
-    - name: Install all managed packages
-      yum: name={{item}} state=latest
-      with_items:
-        - htop
-        - mlocate
-        - parallel
-        - pigz
-        - wget
-        - zsh
+    - name: install and remove packages with manager `yum`
+      block:
+      - yum: name={{ item }} state=latest
+        with_items:
+          - curl
+          - docker
+          - htop
+          - java-1.8.0-openjdk-devel
+          - mlocate
+          - parallel
+          - pigz
+          - tree
+          - wget
+          - zsh
+      - yum: name=={{ item }} state=removed
+        with_items:
+          - java-1.7.0-openjdk
 
-    - name: Sync target sets
-      command: >
-        aws s3 sync
-          --no-progress
-          s3://twinstrand-reference-data/target-sets
-          /pipeline/reference-data/target-sets
+    - name: install packages managed by `conda`
+      conda: name={{ item }} state=latest channels=bioconda executable={{ miniconda_conda_bin }}
+      with_items:
+        - bwa
+        - bwakit
+        - fgbio
+        - ipython
+        - numpy
+        - picard
+        - samtools
+        - scipy
+        - vardict
+
+    - name: tell GNU parallel you will cite
+      become: False
+      block: 
+      - file:
+          path: '~/.parallel'
+          state: directory
+          group: "{{ ansible_ssh_user }}"
+          owner: "{{ ansible_ssh_user }}"
+          mode: 0775
+
+      - copy:
+          content: ''
+          dest: '~/.parallel/will-cite'
+          force: no
+          group: "{{ ansible_ssh_user }}"
+          owner: "{{ ansible_ssh_user }}"
+          mode: 664
+
+    - name: "add {{ ansible_ssh_user }} to group `docker` and set the shell to `zsh`"
+      user:
+        name: "{{ ansible_ssh_user }}"
+        shell: /bin/zsh
+        groups: docker
+        append: yes

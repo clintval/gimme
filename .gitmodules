@@ -1,0 +1,10 @@
+[submodule "library/conda"]
+	path = library/conda
+	url = git@github.com:UDST/ansible-conda.git
+[submodule ".dotfiles"]
+	path = .dotfiles
+	url = git@github.com:clintval/.dotfiles.git
+[submodule "roles/miniconda"]
+	path = roles/miniconda
+	url = git@github.com:clintval/ansible-miniconda.git
+	branch = cv_fix_curl_remove
