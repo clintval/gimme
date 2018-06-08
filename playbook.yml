@@ -64,7 +64,7 @@
           owner: "{{ ansible_ssh_user }}"
           mode: 664
 
-    - name: "add {{ ansible_ssh_user }} to group `docker` and set the shell to `zsh`"
+    - name: "add user to group `docker` and set the shell to `zsh`"
       user:
         name: "{{ ansible_ssh_user }}"
         shell: /bin/zsh
