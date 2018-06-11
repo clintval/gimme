@@ -41,7 +41,9 @@
         - bwa
         - bwakit
         - fgbio
+        - kraken
         - ipython
+        - jellyfish
         - numpy
         - picard
         - primer3

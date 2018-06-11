@@ -11,6 +11,14 @@ This stack is what I use for carefree disposable development environments. Your 
 - [EC2](https://aws.amazon.com/ec2/) full-access
 - [direnv](https://direnv.net/) (optional)
 
+#### Installation
+
+Ensure you do a recursive clone otherwise you will not pull the submodule roles.
+
+```bash
+❯ git clone --recursive https://github.com/clintval/gimme.git
+```
+
 #### Vagrant Plugins
 
 ```bash
