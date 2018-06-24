@@ -26,6 +26,14 @@ Ensure you do a recursive clone otherwise you will not pull the submodule roles.
 ❯ vagrant plugin install vagrant-aws
 ```
 
+#### Ansible Roles
+
+We will install the miniconda role through `ansible-galaxy`:
+
+```bash
+❯ ansible-galaxy install andrewrothstein.miniconda
+```
+
 #### Vagrant Box
 
 A dummy box is provided for the `aws` provider. This acts as a pass-through for Vagrant and could be created with defaults.
