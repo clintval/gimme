@@ -28,7 +28,7 @@ Ensure you do a recursive clone otherwise you will not pull the submodule roles.
 
 #### Ansible Roles
 
-We will a miniconda role as provided by `ansible-galaxy`:
+We will install the miniconda role through `ansible-galaxy`:
 
 ```bash
 ❯ ansible-galaxy install andrewrothstein.miniconda
