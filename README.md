@@ -13,7 +13,7 @@ This stack is what I use for carefree disposable development environments. Your 
 
 #### Installation
 
-Ensure you do a recursive clone otherwise you will not pull the submodule roles.
+Ensure you do a recursive clone otherwise you will not pull the submodules.
 
 ```bash
 ❯ git clone --recursive https://github.com/clintval/gimme.git
