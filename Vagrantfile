@@ -19,7 +19,8 @@ Vagrant.configure('2') do |config|
     ]
 
     aws.tags = {
-        'Name' => ENV['AWS_INSTANCE_TAG_NAME']
+        'Name'  => ENV['AWS_INSTANCE_TAG_NAME'],
+        'Owner' => ENV['AWS_INSTANCE_TAG_OWNER']
     }
 
     override.ssh.username         = 'ec2-user'
