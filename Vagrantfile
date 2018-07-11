@@ -3,19 +3,33 @@ require 'vagrant-env'
 
 Vagrant.configure('2') do |config|
   config.env.enable
-
   config.vm.box = 'aws-dummy'
   config.vm.provider 'aws' do |aws, override|
-    aws.ami           = ENV['AWS_AMI']
-    aws.instance_type = ENV['AWS_INSTANCE_TYPE']
-    aws.keypair_name  = ENV['AWS_KEYPAIR_NAME']
-    aws.region        = ENV['AWS_REGION']
+    aws.ami                    = ENV['AWS_AMI']
+    aws.instance_type          = ENV['AWS_INSTANCE_TYPE']
+    aws.keypair_name           = ENV['AWS_KEYPAIR_NAME']
+    aws.region                 = ENV['AWS_REGION']
+    aws.access_key_id          = ENV['AWS_ACCESS_KEY_ID']
+    aws.secret_access_key      = ENV['AWS_SECRET_ACCESS_KEY']
 
-    aws.access_key_id     = ENV['AWS_ACCESS_KEY_ID']
-    aws.secret_access_key = ENV['AWS_SECRET_ACCESS_KEY']
+    # Open SSH ports for all incoming connections.
+    aws.security_groups        = ['SSH From Anywhere']
 
-    aws.security_groups = [
-      'SSH From Anywhere'
+    # Increase the seconds for high timeout connections.
+    aws.instance_ready_timeout = 180  # seconds
+
+
+    # Do not provision greater than 999Gb until this issue is addressed:
+    #
+    #     https://github.com/mitchellh/vagrant-aws/issues/547
+    #
+    aws.block_device_mapping = [
+      {
+        'DeviceName'              => '/dev/sda1',
+        'Ebs.VolumeSize'          => 900,
+        'Ebs.VolumeType'          => 'gp2',
+        'Ebs.DeleteOnTermination' => true
+      }
     ]
 
     aws.tags = {
