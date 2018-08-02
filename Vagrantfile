@@ -12,21 +12,16 @@ Vagrant.configure('2') do |config|
     aws.access_key_id          = ENV['AWS_ACCESS_KEY_ID']
     aws.secret_access_key      = ENV['AWS_SECRET_ACCESS_KEY']
 
-    # Open SSH ports for all incoming connections.
+    # Open ports for any incoming connections.
     aws.security_groups        = ['SSH From Anywhere']
 
     # Increase the seconds for high timeout connections.
     aws.instance_ready_timeout = 180  # seconds
 
-
-    # Do not provision greater than 999Gb until this issue is addressed:
-    #
-    #     https://github.com/mitchellh/vagrant-aws/issues/547
-    #
     aws.block_device_mapping = [
       {
-        'DeviceName'              => '/dev/sda1',
-        'Ebs.VolumeSize'          => 900,
+        'DeviceName'              => '/dev/xvda',
+        'Ebs.VolumeSize'          => ENV['AWS_EBS_GIGABYTES'],
         'Ebs.VolumeType'          => 'gp2',
         'Ebs.DeleteOnTermination' => true
       }

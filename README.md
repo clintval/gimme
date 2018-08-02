@@ -52,7 +52,7 @@ export AWS_ACCESS_KEY_ID=YOURACCESSIDGOESHERE
 export AWS_SECRET_ACCESS_KEY=YOURSECRETKEYGOESHERE
 ```
 
-Source the file `.envrc`.
+Edit and then source the file `.envrc`.
 
 ## Configuration
 
