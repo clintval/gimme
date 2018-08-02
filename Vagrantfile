@@ -36,6 +36,10 @@ Vagrant.configure('2') do |config|
     override.ssh.private_key_path = ENV['PRIVATE_KEY_PATH']
   end
 
+  # NB: A Windows incompatible config.
+  # Safer if you are on MacOS and do not have SMB configured.
+  config.vm.synced_folder ".", "/vagrant", type: "rsync"
+
   config.vm.provision 'ansible' do |ansible|
     ansible.playbook = 'playbook.yml'
     ansible.compatibility_mode = '2.0'
