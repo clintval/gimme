@@ -4,7 +4,7 @@
   remote_user: ec2-user
 
   vars:
-    miniconda_make_sys_default: True
+    miniconda_make_sys_default: False
     miniconda_pkg_update: False
 
   roles:
@@ -17,46 +17,44 @@
   tasks:
     - name: install and remove packages with manager `yum`
       block:
-      - yum: name={{ item }} state=latest
-        with_items:
-          - aws-cli
-          - amazon-efs-utils
-          - curl
-          - docker
-          - htop
-          - java-1.8.0-openjdk-devel
-          - mlocate
-          - parallel
-          - pigz
-          - tree
-          - wget
-          - zsh
-      - yum: name=={{ item }} state=removed
-        with_items:
-          - java-1.7.0-openjdk
+      - yum:
+          name:
+            - java-1.7.0-openjdk
+          state: removed
+      - yum:
+          name:
+            - aws-cli
+            - amazon-efs-utils
+            - curl
+            - docker
+            - htop
+            - java-1.8.0-openjdk-devel
+            - mlocate
+            - parallel
+            - pigz
+            - tree
+            - wget
+            - zsh
+          state: present
+
 
     - name: install packages managed by `conda`
       conda: name={{ item }} state=latest channels=bioconda executable={{ miniconda_conda_bin }}
       with_items:
-        - bcftools
+        - bcftoolks
         - bedtools
-        - blast
         - bwa
         - bwakit
         - fgbio
-        - kraken
         - ipython
-        - jellyfish
         - numpy
         - picard
-        - primer3
-        - repeatmasker
         - samtools
-        - scipy
+        - r-essentials
         - snpeff
-        - vardict
-        - vcftools
-        - viennarna
+        - vcftool
+        - mro-base
+
 
     - name: tell GNU parallel you will cite
       become: False
