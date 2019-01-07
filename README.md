@@ -87,7 +87,7 @@ destination=0.0.0.0/0
 ## Spinning up!
 
 ```bash
-# Connect to AWS and create the instance
+# Connect to AWS, start and provision the instance
 ❯ vagrant up
 
 # Provision the instance
