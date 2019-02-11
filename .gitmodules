@@ -1,6 +1,3 @@
-[submodule "library/conda"]
-	path = library/conda
-	url = git@github.com:UDST/ansible-conda.git
 [submodule ".dotfiles"]
 	path = .dotfiles
 	url = git@github.com:clintval/.dotfiles.git
